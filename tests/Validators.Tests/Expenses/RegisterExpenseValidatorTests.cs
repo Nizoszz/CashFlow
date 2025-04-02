@@ -1,61 +1,57 @@
 ﻿using CashFlow.Application.UseCases.Expenses;
-using CashFlow.Communication.Enums;
-using CashFlow.Communication.Requests;
+using CashFlow.Domain.Enums;
 using CashFlow.Exception;
+using Utils.Tests.Factory;
 
 namespace Validators.Tests.Expenses
 {
     public class RegisterExpenseValidatorTests
     {
-        private readonly RegisterExpenseValidator _validator;
-        private RequestExpenseJson _requestJson;
-        public RegisterExpenseValidatorTests()
-        { 
-            _validator = new RegisterExpenseValidator();
-            _requestJson = new RequestExpenseJson
-            {
-                Title = "Validate Title",
-                Description = "Test expense",
-                Date = DateTime.Now,
-                Amount = 100,
-                PaymentType = PaymentType.Cash
-            }; ;
+        private readonly RegisterExpenseValidator _validator = new RegisterExpenseValidator();
 
-        }
         [Fact]
         public void Validate_All_Fields_Are_Valid()
         {
+            // Given
+            var request = RegisterExpenseFactory.Build();
             // When
-            var response = _validator.Validate(_requestJson);
+            var response = _validator.Validate(request);
 
             // Then
             Assert.True(response.IsValid);
             Assert.Empty(response.Errors);
         }
 
-        [Fact]
-        public void Validate_Title_Is_Required()
+        [Theory]
+        [InlineData("")]
+        [InlineData("       ")]
+        [InlineData(null)]
+        public void Validate_Title_Is_Required(string value)
         {
             // Given
-            _requestJson.Title = "";
+            var request = RegisterExpenseFactory.Build();
+            request.Title = value;
 
             // When
-            var response = _validator.Validate(_requestJson);
+            var response = _validator.Validate(request);
 
             // Then
             Assert.NotNull(response);
             Assert.False(response.IsValid);
             Assert.Single(response.Errors, e => e.PropertyName == "Title" && e.ErrorMessage == ResourceErrorMessages.REQUIRED_TITLE);
         }
-        [Fact]
-        public void Validate_Amount_Is_Greater_Than_Zero()
-        { 
+        [Theory]
+        [InlineData(0)]
+        [InlineData(-10)]
+        public void Validate_Amount_Is_Greater_Than_Zero(int value)
+        {
             // Given
-            _requestJson.Amount = 0;
+            var request = RegisterExpenseFactory.Build();
+            request.Amount = value;
 
             // When
-            var response = _validator.Validate(_requestJson);
-            
+            var response = _validator.Validate(request);
+
             // Then
             Assert.NotNull(response);
             Assert.False(response.IsValid);
@@ -63,12 +59,13 @@ namespace Validators.Tests.Expenses
         }
         [Fact]
         public void Validate_Date_Is_Not_In_The_Future()
-        { 
+        {
             // Given
-            _requestJson.Date = DateTime.Now.AddDays(1);
+            var request = RegisterExpenseFactory.Build();
+            request.Date = DateTime.Now.AddDays(1);
 
             // When
-            var response = _validator.Validate(_requestJson);
+            var response = _validator.Validate(request);
 
             // Then
             Assert.NotNull(response);
@@ -80,10 +77,11 @@ namespace Validators.Tests.Expenses
         public void Validate_Payment_Type_Is_Valid()
         {
             // Given
-            _requestJson.PaymentType = (PaymentType)999;
+            var request = RegisterExpenseFactory.Build();
+            request.PaymentType = (PaymentType)999;
 
             // When
-            var response = _validator.Validate(_requestJson);
+            var response = _validator.Validate(request);
 
             // Then
             Assert.NotNull(response);
