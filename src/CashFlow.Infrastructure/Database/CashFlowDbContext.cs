@@ -5,13 +5,11 @@ namespace CashFlow.Infrastructure.Database
 {
     internal class CashFlowDbContext : DbContext
     {
-        public DbSet<ExpenseEntity> Expenses { get; set; }
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        public CashFlowDbContext(DbContextOptions options) : base(options)
         {
-            var connectionString = "Server=localhost;Database=cash_flow;Uid=root;Pwd=verysecret;";
-            var serverVersion = new MySqlServerVersion(new Version(9,2,0));
-            optionsBuilder.UseMySql(connectionString, serverVersion);
+
         }
+        public DbSet<ExpenseEntity> Expenses { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<ExpenseEntity>(entity =>
