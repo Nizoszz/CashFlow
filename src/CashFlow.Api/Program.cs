@@ -11,8 +11,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddRouting(option => option.LowercaseUrls = true);
 builder.Services.AddMvc(options => options.Filters.Add(typeof(ExceptionFilter)));
-builder.Services.AddInfrastructure();
+builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddApplication();
+builder.Configuration.GetConnectionString("DefaultConnection");
 
 var app = builder.Build();
 
