@@ -1,9 +1,4 @@
 ﻿using CashFlow.Domain.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CashFlow.Infrastructure.Database
 {
@@ -14,9 +9,9 @@ namespace CashFlow.Infrastructure.Database
         {
             _dbContext = dbContext;
         }
-        public void Commit()
+        public async Task Commit()
         {
-            _dbContext.SaveChanges();
+            await _dbContext.SaveChangesAsync();
 
         }
 

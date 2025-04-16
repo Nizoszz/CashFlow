@@ -11,10 +11,10 @@ namespace CashFlow.Infrastructure.Repositories
         {
             _dbContext = dbContext;
         }
-        public void Add(ExpenseEntity entity)
+        public async Task Add(ExpenseEntity entity)
         {
             _dbContext.Expenses.Add(entity);
-            _dbContext.SaveChanges();
+            await _dbContext.SaveChangesAsync();
         }
     };
 
