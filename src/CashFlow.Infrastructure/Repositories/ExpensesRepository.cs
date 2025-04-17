@@ -1,6 +1,7 @@
 ﻿using CashFlow.Domain.Entities;
 using CashFlow.Domain.Repositories.Expenses;
 using CashFlow.Infrastructure.Database;
+using Microsoft.EntityFrameworkCore;
 
 namespace CashFlow.Infrastructure.Repositories
 {
@@ -15,6 +16,11 @@ namespace CashFlow.Infrastructure.Repositories
         {
             _dbContext.Expenses.Add(entity);
             await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task<List<ExpenseEntity>> GetAll()
+        {
+            return await _dbContext.Expenses.ToListAsync();
         }
     };
 
