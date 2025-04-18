@@ -129,6 +129,9 @@
   <data name="INVALID_PAYMENT_TYPE" xml:space="preserve">
     <value>O tipo de pagamento não é válido.</value>
   </data>
+  <data name="NOT_FOUND_EXPENSE" xml:space="preserve">
+    <value>Expense não foi encontrada.</value>
+  </data>
   <data name="REQUIRED_TITLE" xml:space="preserve">
     <value>Título é obrigatório.</value>
   </data>

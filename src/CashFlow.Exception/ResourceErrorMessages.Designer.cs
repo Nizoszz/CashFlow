@@ -97,6 +97,15 @@ namespace CashFlow.Exception {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Not found expense..
+        /// </summary>
+        public static string NOT_FOUND_EXPENSE {
+            get {
+                return ResourceManager.GetString("NOT_FOUND_EXPENSE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Title is required..
         /// </summary>
         public static string REQUIRED_TITLE {

@@ -11,5 +11,7 @@ namespace CashFlow.Domain.Repositories.Expenses
     {
         Task Add(ExpenseEntity entity);
         Task<List<ExpenseEntity>> GetAll();
+
+        Task<ExpenseEntity?> GetById(long id);
     }
 }

@@ -17,6 +17,7 @@ namespace CashFlow.Application.Mapper
         private void fromEntity() {
             CreateMap<ExpenseEntity, ResponseExpenseJson>();
             CreateMap<ExpenseEntity, ResponseShortExpenseJson>();
+            CreateMap<ExpenseEntity, ResponseExpenseJson>();
         }
     }
 
