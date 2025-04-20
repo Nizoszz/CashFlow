@@ -1,11 +1,11 @@
 ﻿using CashFlow.Communication.Requests;
 using CashFlow.Exception;
 using FluentValidation;
-namespace CashFlow.Application.UseCases.Expenses
+namespace CashFlow.Application.UseCases.Expenses.Validator
 {
-    public class RegisterExpenseValidator : AbstractValidator<RequestExpenseJson>
+    public class RequestExpenseValidator : AbstractValidator<RequestExpenseJson>
     {
-        public RegisterExpenseValidator()
+        public RequestExpenseValidator()
         {
             RuleFor(request => request.Title)
                 .NotEmpty().WithMessage(ResourceErrorMessages.REQUIRED_TITLE);

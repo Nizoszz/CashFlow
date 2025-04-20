@@ -5,8 +5,9 @@ using CashFlow.Domain.Entities;
 using CashFlow.Domain.Repositories;
 using CashFlow.Domain.Repositories.Expenses;
 using CashFlow.Exception.ExceptionBase;
+using CashFlow.Application.UseCases.Expenses.Validator;
 
-namespace CashFlow.Application.UseCases.Expenses
+namespace CashFlow.Application.UseCases.Expenses.RegisterExpenses
 {
     public class RegisterExpensesUseCase : IRegisterExpensesUseCase
     {
@@ -38,9 +39,9 @@ namespace CashFlow.Application.UseCases.Expenses
                 throw;
             }
         }
-        private void Validate(RequestExpenseJson request)
+        private static void Validate(RequestExpenseJson request)
         {
-            var validator = new RegisterExpenseValidator();
+            var validator = new RequestExpenseValidator();
             var result = validator.Validate(request);
             if (!result.IsValid) 
             {

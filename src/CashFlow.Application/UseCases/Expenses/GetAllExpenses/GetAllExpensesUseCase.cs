@@ -2,7 +2,7 @@
 using CashFlow.Communication.Responses;
 using CashFlow.Domain.Repositories.Expenses;
 
-namespace CashFlow.Application.UseCases.Expenses
+namespace CashFlow.Application.UseCases.Expenses.GetAllExpenses
 {
     public class GetAllExpensesUseCase : IGetAllExpensesUseCase
     {

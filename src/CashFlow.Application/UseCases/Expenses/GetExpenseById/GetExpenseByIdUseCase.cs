@@ -4,7 +4,7 @@ using CashFlow.Domain.Repositories.Expenses;
 using CashFlow.Exception;
 using CashFlow.Exception.ExceptionBase;
 
-namespace CashFlow.Application.UseCases.Expenses
+namespace CashFlow.Application.UseCases.Expenses.GetExpenseById
 {
     class GetExpenseByIdUseCase : IGetExpenseByIdUseCase
     {
