@@ -23,9 +23,20 @@ namespace CashFlow.Application.UseCases.Expenses
         {
             Validate(request);
             var entity = _mapper.Map<ExpenseEntity>(request);
-            await _expensesRepository.Add(entity);
-            await _unitOfWork.Commit();
-            return _mapper.Map<ResponseExpenseJson>(entity);
+            try
+            {
+                await _unitOfWork.BeginTransactionAsync();
+
+                await _expensesRepository.Add(entity);
+                await _unitOfWork.CommitAsync();
+
+                return _mapper.Map<ResponseExpenseJson>(entity);
+            }
+            catch (System.Exception)
+            {
+                await _unitOfWork.RollbackAsync();
+                throw;
+            }
         }
         private void Validate(RequestExpenseJson request)
         {
