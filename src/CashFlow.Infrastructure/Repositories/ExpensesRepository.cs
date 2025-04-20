@@ -18,6 +18,17 @@ namespace CashFlow.Infrastructure.Repositories
             await _dbContext.SaveChangesAsync();
         }
 
+        public async Task<bool> DeleteById(long id)
+        {
+            var result = await _dbContext.Expenses.FirstOrDefaultAsync(e => e.Id == id);
+            if (result is null)
+            {
+                return false;
+            }
+            _dbContext.Expenses.Remove(result);
+            return true;
+        }
+
         public async Task<List<ExpenseEntity>> GetAll()
         {
             return await _dbContext.Expenses.AsNoTracking().ToListAsync();
@@ -26,6 +37,11 @@ namespace CashFlow.Infrastructure.Repositories
         public async Task<ExpenseEntity?> GetById(long id)
         {
             return await _dbContext.Expenses.AsNoTracking().FirstOrDefaultAsync(e => e.Id == id);
+        }
+
+        public void Update(ExpenseEntity entity)
+        {
+            _dbContext.Expenses.Update(entity);
         }
     };
 

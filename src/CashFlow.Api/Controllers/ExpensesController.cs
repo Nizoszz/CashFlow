@@ -1,4 +1,8 @@
-﻿using CashFlow.Application.UseCases.Expenses;
+﻿using CashFlow.Application.UseCases.Expenses.DeleteExpenseById;
+using CashFlow.Application.UseCases.Expenses.GetAllExpenses;
+using CashFlow.Application.UseCases.Expenses.GetExpenseById;
+using CashFlow.Application.UseCases.Expenses.RegisterExpenses;
+using CashFlow.Application.UseCases.Expenses.UpdateExpense;
 using CashFlow.Communication.Requests;
 using CashFlow.Communication.Responses;
 using Microsoft.AspNetCore.Mvc;
@@ -38,6 +42,26 @@ namespace CashFlow.Api.Controllers
         {
             var response = await useCase.Execute(id);
             return Ok(response);        
+        }
+
+        [HttpDelete]
+        [Route("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> DeleteExpenseById([FromServices] IDeleteExpenseByIdUseCase useCase, [FromRoute] long id) 
+        {
+            await useCase.Execute(id);
+            return NoContent();
+        }
+        [HttpPut]
+        [Route("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> UpdateExpense([FromServices] IUpdateExpenseUseCase useCase, [FromRoute] long id, [FromBody] RequestExpenseJson request)
+        {
+            await useCase.Execute(id, request);
+            return NoContent();
         }
     }
 }

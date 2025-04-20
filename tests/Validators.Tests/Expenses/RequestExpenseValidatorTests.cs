@@ -1,13 +1,13 @@
-﻿using CashFlow.Application.UseCases.Expenses;
+﻿using CashFlow.Application.UseCases.Expenses.Validator;
 using CashFlow.Domain.Enums;
 using CashFlow.Exception;
 using Utils.Tests.Factory;
 
 namespace Validators.Tests.Expenses
 {
-    public class RegisterExpenseValidatorTests
+    public class RequestExpenseValidatorTests
     {
-        private readonly RegisterExpenseValidator _validator = new RegisterExpenseValidator();
+        private readonly RequestExpenseValidator _validator = new RequestExpenseValidator();
 
         [Fact]
         public void Validate_All_Fields_Are_Valid()
