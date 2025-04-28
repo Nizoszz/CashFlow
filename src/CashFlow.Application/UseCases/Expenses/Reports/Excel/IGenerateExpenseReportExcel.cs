@@ -2,8 +2,6 @@
 {
     public interface IGenerateExpenseReportExcel
     {
-        public async Task<byte[]> Execute(DateOnly month) 
-        { 
-        }
+        public Task<byte[]> Execute(DateOnly month);
     }
 }
