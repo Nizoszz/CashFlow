@@ -14,5 +14,6 @@ namespace CashFlow.Domain.Repositories.Expenses
         Task<ExpenseEntity?> GetById(long id);
         Task<bool> DeleteById(long id);
         void Update(ExpenseEntity entity);
+        Task<List<ExpenseEntity>> FilterByMonth(DateOnly date);
     }
 }
