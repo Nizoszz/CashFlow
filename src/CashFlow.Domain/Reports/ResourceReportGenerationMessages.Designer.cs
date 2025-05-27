@@ -97,6 +97,15 @@ namespace CashFlow.Domain.Reports {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Hey, N1z0!.
+        /// </summary>
+        public static string GREETINGS {
+            get {
+                return ResourceManager.GetString("GREETINGS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Payment Type.
         /// </summary>
         public static string PAYMENT_TYPE {
